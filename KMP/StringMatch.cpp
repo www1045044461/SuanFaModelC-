@@ -2,6 +2,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 //打印串
+
+#define OPEN_HASHSAME //
+
 void printString(String *str)
 {
     if (str == NULL)
@@ -31,17 +34,17 @@ String *intitString(char *data, int len)
     return str;
 }
 //暴力匹配
-int LinearMatch(String *str, String *pattern, int pos=0)
+int LinearMatch(String *str, String *pattern, int pos = 0)
 {
-    static int num=0;
+    static int num = 0;
     int strP = pos;
     int patternP = 0;
 
-    while ((strP < str->length) && (patternP < pattern->length-1))
+    while ((strP < str->length) && (patternP < pattern->length - 1))
     {
         /* code */
         num++;
-        printf("%c %c \t",str->data[strP],pattern->data[patternP]);
+        printf("%c %c \t", str->data[strP], pattern->data[patternP]);
         if (str->data[strP] == pattern->data[patternP])
         {
             strP++;
@@ -57,8 +60,8 @@ int LinearMatch(String *str, String *pattern, int pos=0)
             printf("回溯\n");
         }
     }
-    printf("暴力次数:%d \n",num);
-    if (patternP == pattern->length-1)
+    printf("暴力次数:%d \n", num);
+    if (patternP == pattern->length - 1)
     {
         /* code */
         return strP - patternP;
@@ -69,65 +72,98 @@ int LinearMatch(String *str, String *pattern, int pos=0)
 }
 
 //ＫＭＰ算法
-int* CreateNext(String *str) //生成next数组
+int *CreateNext(String *str) //生成next数组
 {
-    
-    if(str==NULL) return NULL;
-    int *nextArry=(int*)malloc(sizeof(int)*str->length);
+
+    if (str == NULL)
+        return NULL;
+    int *nextArry = (int *)malloc(sizeof(int) * str->length);
     //要返回的数组只能从堆创建
-    int k=-1;int j=0;
-    nextArry[0]=-1;//第一个字符无法移动
-    
-    while(j<str->length-1){
-       
-       if (k==-1 || str->data[j]==str->data[k]) {
-           nextArry[++j]=++k;
-           //满足P[0~k-1]k=P[j-k~j-1]j;找到满足该条件的K值
-       }
-       else
-       {
-           k=nextArry[k];
-       }
+    int k = -1;
+    int j = 0;
+    nextArry[0] = -1; //第一个字符无法移动
+
+    while (j < str->length - 1)
+    {
+
+        printf("j:%d  k:%d \n", j, k);
+        if (k == -1 || str->data[j] == str->data[k])
+        {
+            {
+                j++;
+                k++;
+#ifdef OPEN_HASHSAME
+                //解决映射一致导致的效率浪费问题
+                //效率进一步提高
+                if (str->data[j] == str->data[nextArry[j]])
+                {
+                    nextArry[j] = nextArry[k];
+                }
+                else
+#endif
+                {
+                    nextArry[j] = k;
+                }
+            }
+            printf("next[j+1]=next[j]+1 \n");
+            //满足P[0~k-1]k=P[j-k~j-1]j;找到满足该条件的K值
+        }
+        else
+        {
+            printf("next[j＋１]＝next[k]+1\n");
+            k = nextArry[k]; //ｋ与ｊ不相同，保持ｋ的值；
+            //此时ｋ＝ｎｅｘｔ[k],且ｊ保持不变，下次循环
+            //就是next[j+1]=next[k]+1;
+        }
     }
     return nextArry;
 }
-int KMPMatch(String *str,String *pattern)
+int KMPMatch(String *str, String *pattern)
 {
-    static int KMPNum=0;
-    if((str==NULL)||(pattern==NULL)) return -1;
-    
-    int *nextArry=CreateNext(pattern);//获取nextArry;
-    if(nextArry==NULL) return -1;
-    int j=0;int i=0;
+    static int KMPNum = 0;
+    if ((str == NULL) || (pattern == NULL))
+        return -1;
 
-    for(i= 0; (i < str->length-1)&&(j<pattern->length-1); )
+    int *nextArry = CreateNext(pattern); //获取nextArry;
+    if (nextArry == NULL)
+        return -1;
+
+    for (int i = 0; i < pattern->length - 1; i++)
+    {
+        /* code */
+        printf("%d \t", nextArry[i]);
+    }
+    printf("\n");
+    int j = 0;
+    int i = 0;
+
+    for (i = 0; (i < str->length - 1) && (j < pattern->length - 1);)
     {
         KMPNum++;
-        printf("%c %c ",str->data[i],str->data[j]);
-        if((str->data[i]==pattern->data[j])||(j==-1))
+        printf("%c %c ", str->data[i], str->data[j]);
+        if ((str->data[i] == pattern->data[j]) || (j == -1))
         {
-            i++;j++;
+            i++;
+            j++;
             printf("OK　\n");
-        }//字符匹配,或者j回溯为-1的时候
-        
-        else//字符不匹配
+        } //字符匹配,或者j回溯为-1的时候
+
+        else //字符不匹配
         {
-            j=nextArry[j];
+            j = nextArry[j];
             printf("回溯j\n");
         }
-        
     }
-    printf("KMP算法次数:%d \n",KMPNum);
-    if (j==pattern->length-1) {
+    printf("KMP算法次数:%d \n", KMPNum);
+    if (j == pattern->length - 1)
+    {
         /* code */
-        return i-j;
+        return i - j;
     }
     else
     {
         return -1;
     }
-    
-    
 }
 
 int main(int argc, char const *argv[])
@@ -138,12 +174,14 @@ int main(int argc, char const *argv[])
     String *str = intitString(a, 20);
     String *str1 = intitString(pattern, 5);
     int vb = LinearMatch(str, str1);
-    printf("return:%d \n",vb);
+    printf("return:%d \n", vb);
     printString(str);
     printString(str1);
-    
+
     printf("KMP算法\n");
-    int vKmp=KMPMatch(str,str1);
-    printf("return:%d \n",vKmp);
+    char fgggg[] = "aaaab";
+    String *str2 = intitString(fgggg, 6);
+    int vKmp = KMPMatch(str, str2);
+    printf("return:%d \n", vKmp);
     return 0;
 }

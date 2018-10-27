@@ -1,0 +1,37 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	0.0.0	/15560853/
+CreateHanno	HanoStack.cpp	/^void CreateHanno(Tower *towerArry[3], int BlockNum)$/;"	f	typeref:typename:void
+CreateNext	KMP/StringMatch.cpp	/^int* CreateNext(String *str) \/\/生成next数组$/;"	f	typeref:typename:int *
+HannoNoStack	Hano.cpp	/^void HannoNoStack(int num,string tar1,string tar2,string tar3)$/;"	f	typeref:typename:void
+KMPMatch	KMP/StringMatch.cpp	/^int KMPMatch(String *str,String *pattern)$/;"	f	typeref:typename:int
+LinearMatch	KMP/StringMatch.cpp	/^int LinearMatch(String *str, String *pattern, int pos=0)$/;"	f	typeref:typename:int
+MAX	HanoStack.cpp	/^const int MAX = 64;$/;"	v	typeref:typename:const int
+Move	Hano.cpp	/^inline void Move(int num,string tarSrc,string dis)$/;"	f	typeref:typename:void
+Pow	HanoStack.cpp	/^int Pow(int base, int exp)$/;"	f	typeref:typename:int
+ResolveHanno	HanoStack.cpp	/^void ResolveHanno(int MAX, Tower *towerArry[3])$/;"	f	typeref:typename:void
+STRING_MATCH	KMP/StringMatch.h	/^#define STRING_MATCH$/;"	d
+String	KMP/StringMatch.h	/^} String;$/;"	t	typeref:struct:__anon33c782760108
+Tower	HanoStack.cpp	/^Tower::Tower(int num, string name)$/;"	f	class:Tower
+Tower	HanoStack.cpp	/^struct Tower$/;"	s	file:
+__anon33c782760108	KMP/StringMatch.h	/^{$/;"	s
+block	HanoStack.cpp	/^    int block[MAX];$/;"	m	struct:Tower	typeref:typename:int[]	file:
+data	KMP/StringMatch.h	/^    char *data;$/;"	m	struct:__anon33c782760108	typeref:typename:char *
+intitString	KMP/StringMatch.cpp	/^String *intitString(char *data, int len)$/;"	f	typeref:typename:String *
+length	HanoStack.cpp	/^    int length;$/;"	m	struct:Tower	typeref:typename:int	file:
+length	KMP/StringMatch.h	/^    int length;$/;"	m	struct:__anon33c782760108	typeref:typename:int
+main	Hano.cpp	/^int main(int argc, char const *argv[])$/;"	f	typeref:typename:int
+main	HanoStack.cpp	/^int main(int argc, char const *argv[])$/;"	f	typeref:typename:int
+main	KMP/StringMatch.cpp	/^int main(int argc, char const *argv[])$/;"	f	typeref:typename:int
+name	HanoStack.cpp	/^    string name;$/;"	m	struct:Tower	typeref:typename:string	file:
+num1	Hano.cpp	/^static int num1=0;$/;"	v	typeref:typename:int	file:
+pop	HanoStack.cpp	/^int Tower::pop()$/;"	f	class:Tower	typeref:typename:int
+print	HanoStack.cpp	/^void Tower::print()$/;"	f	class:Tower	typeref:typename:void
+printString	KMP/StringMatch.cpp	/^void printString(String *str)$/;"	f	typeref:typename:void
+push	HanoStack.cpp	/^void Tower::push(int num)$/;"	f	class:Tower	typeref:typename:void
+top	HanoStack.cpp	/^int Tower::top()$/;"	f	class:Tower	typeref:typename:int
+towerArry	HanoStack.cpp	/^Tower *towerArry[3];$/;"	v	typeref:typename:Tower * [3]
